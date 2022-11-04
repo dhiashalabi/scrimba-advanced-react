@@ -1,15 +1,16 @@
-import React from "react"
-import Menu from "./components/Menu"
-import Favorite from "./components/Favorite"
 import "./App.css"
+import Example from "./components/Example"
 
 function App(props: any) {
   console.log(props)
   return (
     <div>
-      <Menu />
-      <hr />
-      <Favorite />
+      <Example render={
+        function (number: number) {
+          return <h1>{number >= 0 ? "Positive" : "Negative"}</h1>
+        }
+      }
+      />
     </div>
   )
 }
