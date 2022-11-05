@@ -2,7 +2,7 @@ import "./App.css"
 import useWordGame from "./useWordGame"
 
 function App() {
-  const { text, handleChange, timeRemaining, isToStart, startGame, wordCount } = useWordGame(5)
+  const { text, handleChange, timeRemaining, isToStart, startGame, wordCount, inputRef } = useWordGame(5)
   return (
     <div>
       <h1>How fast do you type?</h1>
@@ -10,6 +10,7 @@ function App() {
         onChange={handleChange}
         value={text}
         disabled={!isToStart}
+        ref={inputRef}
       />
       <h4>Time reminaing: {timeRemaining}</h4>
       <button onClick={startGame} disabled={isToStart}>Start</button>

@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 function useWordGame(startingTime: number = 30) {
     const [text, setText] = useState("")
     const [timeRemaining, setTimeRemaining] = useState(startingTime)
     const [isToStart, setIsToStart] = useState(false)
     const [wordCount, setWordCount] = useState(0)
+    const inputRef = useRef<HTMLTextAreaElement>(null)
 
     function calculateWordCount(text: string) {
         const arrWords = text.trim().split(" ")
@@ -19,6 +20,10 @@ function useWordGame(startingTime: number = 30) {
         setTimeRemaining(startingTime)
         setWordCount(0)
         setText("")
+        if (inputRef.current) {
+            inputRef.current.disabled = false
+            inputRef.current.focus()
+        }
     }
 
     function endGame() {
@@ -36,7 +41,7 @@ function useWordGame(startingTime: number = 30) {
         }
     }, [timeRemaining, isToStart])
 
-    return { text, handleChange, timeRemaining, isToStart, startGame, wordCount }
+    return { text, handleChange, timeRemaining, isToStart, startGame, wordCount, inputRef }
 }
 
 export default useWordGame
